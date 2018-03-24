@@ -1,6 +1,16 @@
 <div class="search-bar form-inline">
-  <input class="form-control" type="text" ng-model = "query"/>
+  <input class="form-control" type="text" ng-model = "query" ng-change="$ctrl.search(query)"/>
+  
   <button ng-click="$ctrl.search(query)" class="btn">
     <span class="glyphicon glyphicon-search"></span>
-  </button>
+  </button> 
+  
+  <button ng-click="$ctrl.search(query, $ctrl.prevToken)" ng-disabled="!$ctrl.prevToken" class="btn">
+    <span> < </span>
+  </button> 
+  
+  <button ng-click="$ctrl.search(query, $ctrl.nextToken)" ng-disabled="!$ctrl.nextToken" class="btn">
+    <span> > </span>
+  </button> 
+  
 </div>

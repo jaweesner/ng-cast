@@ -2,18 +2,27 @@ angular.module('video-player')
 
 .component('search', {
   bindings: {
-    result: '<'
+    result: '<',
+    service: '<',
+    apiKey: '<',
+    nextToken: '<',
+    prevToken: '<'
   },
-  controller: function(youTube){
+  controller: function(){
+    this.search = (query, token) => {
+      var obj = {
+        key: this.apiKey,
+        query: query,
+        max: 5,
+        pageToken: token
+      }; 
+      
+      this.service.search(obj, this.result)
+    }
+    
+    this.search = _.debounce(this.search, 500);
+    
     this.$onInit= function(){
-      this.search = (query) => {
-        var obj = {
-          key: window.YOUTUBE_API_KEY,
-          query: query,
-          max: 5
-        } 
-        youTube.search(obj, this.result);
-      }
       this.search('');
     }
     

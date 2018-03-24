@@ -1,6 +1,6 @@
 angular.module('video-player')
 .service('youTube', function($http){
-  this.search = function({key,query,max}, callback){
+  this.search = function({key,query,max, pageToken}, callback){
     
     $http.get("https://www.googleapis.com/youtube/v3/search", {
      params:{
@@ -9,10 +9,11 @@ angular.module('video-player')
       q: query,
       maxResults: max,
       type: 'video',
-      videoEmbeddable: true
+      videoEmbeddable: true,
+      pageToken: pageToken
      } 
     }).then(function(response){
-        callback(response.data.items);
+        callback(response.data);
         //
         
       }, function(data){
