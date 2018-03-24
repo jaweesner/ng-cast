@@ -5,8 +5,11 @@ angular.module('video-player')
   },
   controller: function(){
     this.videos = exampleVideoData;
-    this.currentVideo = exampleVideoData[0];
-    console.log(this);
+    this.currentVideo = this.videos[0];
+    
+    this.selectVideo = (video) => {
+      this.currentVideo = video;
+    }
   },
   templateUrl: 'src/templates/app.html'
 });
