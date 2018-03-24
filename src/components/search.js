@@ -1,9 +1,23 @@
 angular.module('video-player')
 
 .component('search', {
-  controller: function(youTube){
-    console.log(youTube.search)
-    this.data = youTube.search();
+  bindings: {
+    result: '<'
   },
+  controller: function(youTube){
+    this.$onInit= function(){
+      this.search = (query) => {
+        var obj = {
+          key: window.YOUTUBE_API_KEY,
+          query: query,
+          max: 5
+        } 
+        youTube.search(obj, this.result);
+      }
+      this.search('');
+    }
+    
+  },
+
   templateUrl: 'src/templates/search.html'
 });
